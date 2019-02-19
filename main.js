@@ -41,7 +41,7 @@ renderFilterElement = (filterName) => {
 
 // Отрисовка фильтра
 const renderFilter = (filters, container) => {
-    container.innerHTML = '';
+    container.innerHTML = ``;
     const fragment = document.createDocumentFragment();
     
     // Запуск отрисовки всех пунктов списка фильтра
@@ -56,6 +56,13 @@ const renderFilter = (filters, container) => {
 // Рендерим фильтр
 renderFilter(filters, filterContainer);
 
+// Отмечаем чекбокс выбранным
+const setChecked = (element) => {
+    element.checked = `checked`;
+};
 
+// Массив инпутов фильтра 
+const filtersList = Array.from(filterContainer.querySelectorAll(`input`));
 
-
+// Отмечаем пункт All выбранным (cтартовое состояние)
+setChecked(filtersList[0]);
