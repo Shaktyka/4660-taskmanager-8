@@ -4,8 +4,10 @@
 const filterContainer = document.querySelector('.main__filter');
 const cardContainer = document.querySelector('.board__tasks');
 
+
 // Стартовое кол-во карточек
 const startTasks = 7;
+
 
 // Список фильтров
 const filters = [
@@ -23,6 +25,12 @@ const filters = [
 const getRandomNumber = (min, max) => {
   const rand = min + Math.floor(Math.random() * (max + 1 - min));
   return rand;
+};
+
+
+// Отмечаем чекбокс выбранным
+const setChecked = (element) => {
+    element.checked = `checked`;
 };
 
 
@@ -75,23 +83,17 @@ const renderFilter = (filters, container) => {
 renderFilter(filters, filterContainer);
 
 
-// Вешаем обработчик кликов
+// Вешаем обработчик кликов на контейнер с фильтром
 filterContainer.addEventListener(`click`, filterClickHandler);
-
-
-// Отмечаем чекбокс выбранным
-const setChecked = (element) => {
-    element.checked = `checked`;
-};
 
 
 // Массив инпутов фильтра 
 const filtersList = Array.from(filterContainer.querySelectorAll(`input`));
 
+
 // В фильтре отмечаем пункт All выбранным (cтартовое состояние)
 setChecked(filtersList[0]);
 
-////////////////////////////// Отрисовка карточек ///////////////////////////////////
 
 // Шаблон карточки
 const cardTemplate = `<article class="card card--pink card--repeat">
@@ -387,10 +389,11 @@ It is example of repeating task. It marks by wave.</textarea
             </form>
           </article>`;
 
+
 // Рендеринг одной карточки
-renderTask = () => {
+renderTask = (card) => {
     const div = document.createElement(`div`);
-    div.innerHTML = cardTemplate;
+    div.innerHTML = card;
     return div;
 };
 
@@ -402,7 +405,7 @@ const renderTaskList = (amount, container) => {
     
     // Отрисовка всех задач
     for (let i = 0; i < amount; i++) {
-        const task = renderTask();
+        const task = renderTask(cardTemplate);
         fragment.appendChild(task);
     }
     
@@ -411,7 +414,3 @@ const renderTaskList = (amount, container) => {
 
 // Запуск стартовой отрисовки карточек
 renderTaskList(startTasks, cardContainer);
-
-
-
-
