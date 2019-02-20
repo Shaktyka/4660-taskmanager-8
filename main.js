@@ -73,18 +73,6 @@ const renderFilter = (filters, container) => {
 renderFilter(filters, filterContainer);
 
 
-// Данные для одной карточки
-const one_card = {
-    color: 'pink',  // для цветов тут добавляется класс
-    edit: true,
-    repeat: true,
-    deadline: true,
-    text: `It is example of repeating task. It marks by wave.`,
-    status_date: false,
-    status_repeat: false
-};
-
-
 // Шаблон карточки
 const cardTemplate = `<article class="card card--pink card--repeat">
             <form class="card__form" method="get">
