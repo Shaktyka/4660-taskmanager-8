@@ -34,16 +34,6 @@ const setChecked = (element) => {
 };
 
 
-// Обработчик клика по пункту фильтра
-const filterClickHandler = (evt) => {
-    const clickedFilter = evt.target;
-    console.log(clickedFilter); // label или span
-    
-    // const taskNumber = clickedFilter.querySelector(`span`).innerHTML.trim();
-    // console.log(taskNumber);
-};
-
-
 // Рендеринг одного пункта фильтра
 renderFilterElement = (filterName) => {
     const taskAmount = ` ` + getRandomNumber(0, 20);
@@ -81,18 +71,6 @@ const renderFilter = (filters, container) => {
 
 // Рендерим фильтр
 renderFilter(filters, filterContainer);
-
-
-// Вешаем обработчик кликов на контейнер с фильтром
-filterContainer.addEventListener(`click`, filterClickHandler);
-
-
-// Массив инпутов фильтра 
-const filtersList = Array.from(filterContainer.querySelectorAll(`input`));
-
-
-// В фильтре отмечаем пункт All выбранным (cтартовое состояние)
-setChecked(filtersList[0]);
 
 
 // Шаблон карточки
@@ -366,6 +344,31 @@ const renderTaskList = (amount, container) => {
     
     container.appendChild(fragment);
 };
+
+
+// Обработчик клика по пункту фильтра
+const filterClickHandler = (evt) => {
+    cardContainer.innerHTML = ``;
+    
+    const clickedFilter = evt.target;
+    const label = clickedFilter.nextSibling.querySelector(`span`);
+    const taskNumber = label.textContent.trim();
+    
+    if (taskNumber) {
+        renderTaskList(taskNumber, cardContainer);
+    }
+};
+
+// Массив инпутов фильтра 
+const filtersList = Array.from(filterContainer.querySelectorAll(`input`));
+
+// В фильтре отмечаем пункт All выбранным (cтартовое состояние)
+setChecked(filtersList[0]);
+
+// Вешаем обработчики на инпуты в фильтрах
+filtersList.forEach((item) => {
+    item.addEventListener(`click`, filterClickHandler);
+});
 
 // Запуск стартовой отрисовки карточек
 renderTaskList(startTasks, cardContainer);
