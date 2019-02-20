@@ -73,8 +73,20 @@ const renderFilter = (filters, container) => {
 renderFilter(filters, filterContainer);
 
 
+// Данные для одной карточки
+const one_card = {
+    color: 'pink',  // для цветов тут добавляется класс
+    edit: true,
+    repeat: true,
+    deadline: true,
+    text: `It is example of repeating task. It marks by wave.`,
+    status_date: false,
+    status_repeat: false
+};
+
+
 // Шаблон карточки
-const cardTemplate = `<article class="card card--edit card--black">
+const cardTemplate = `<article class="card card--pink card--repeat">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -93,7 +105,7 @@ const cardTemplate = `<article class="card card--edit card--black">
                 </div>
 
                 <div class="card__color-bar">
-                  <svg width="100%" height="10">
+                  <svg class="card__color-bar-wave" width="100%" height="10">
                     <use xlink:href="#wave"></use>
                   </svg>
                 </div>
@@ -105,7 +117,7 @@ const cardTemplate = `<article class="card card--edit card--black">
                       placeholder="Start typing your text here..."
                       name="text"
                     >
-This is example of new task, you can add picture, set date and time, add tags.</textarea
+It is example of repeating task. It marks by wave.</textarea
                     >
                   </label>
                 </div>
@@ -145,53 +157,53 @@ This is example of new task, you can add picture, set date and time, add tags.</
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-mo-1"
+                            id="repeat-mo-2"
                             name="repeat"
                             value="mo"
                           />
-                          <label class="card__repeat-day" for="repeat-mo-1"
+                          <label class="card__repeat-day" for="repeat-mo-2"
                             >mo</label
                           >
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-tu-1"
+                            id="repeat-tu-2"
                             name="repeat"
                             value="tu"
                             checked
                           />
-                          <label class="card__repeat-day" for="repeat-tu-1"
+                          <label class="card__repeat-day" for="repeat-tu-2"
                             >tu</label
                           >
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-we-1"
+                            id="repeat-we-2"
                             name="repeat"
                             value="we"
                           />
-                          <label class="card__repeat-day" for="repeat-we-1"
+                          <label class="card__repeat-day" for="repeat-we-2"
                             >we</label
                           >
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-th-1"
+                            id="repeat-th-2"
                             name="repeat"
                             value="th"
                           />
-                          <label class="card__repeat-day" for="repeat-th-1"
+                          <label class="card__repeat-day" for="repeat-th-2"
                             >th</label
                           >
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-fr-1"
+                            id="repeat-fr-2"
                             name="repeat"
                             value="fr"
                             checked
                           />
-                          <label class="card__repeat-day" for="repeat-fr-1"
+                          <label class="card__repeat-day" for="repeat-fr-2"
                             >fr</label
                           >
                           <input
@@ -199,20 +211,20 @@ This is example of new task, you can add picture, set date and time, add tags.</
                             type="checkbox"
                             name="repeat"
                             value="sa"
-                            id="repeat-sa-1"
+                            id="repeat-sa-2"
                           />
-                          <label class="card__repeat-day" for="repeat-sa-1"
+                          <label class="card__repeat-day" for="repeat-sa-2"
                             >sa</label
                           >
                           <input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
-                            id="repeat-su-1"
+                            id="repeat-su-2"
                             name="repeat"
                             value="su"
                             checked
                           />
-                          <label class="card__repeat-day" for="repeat-su-1"
+                          <label class="card__repeat-day" for="repeat-su-2"
                             >su</label
                           >
                         </div>
@@ -220,7 +232,52 @@ This is example of new task, you can add picture, set date and time, add tags.</
                     </div>
 
                     <div class="card__hashtag">
-                      <div class="card__hashtag-list"></div>
+                      <div class="card__hashtag-list">
+                        <span class="card__hashtag-inner">
+                          <input
+                            type="hidden"
+                            name="hashtag"
+                            value="repeat"
+                            class="card__hashtag-hidden-input"
+                          />
+                          <button type="button" class="card__hashtag-name">
+                            #repeat
+                          </button>
+                          <button type="button" class="card__hashtag-delete">
+                            delete
+                          </button>
+                        </span>
+
+                        <span class="card__hashtag-inner">
+                          <input
+                            type="hidden"
+                            name="hashtag"
+                            value="repeat"
+                            class="card__hashtag-hidden-input"
+                          />
+                          <button type="button" class="card__hashtag-name">
+                            #cinema
+                          </button>
+                          <button type="button" class="card__hashtag-delete">
+                            delete
+                          </button>
+                        </span>
+
+                        <span class="card__hashtag-inner">
+                          <input
+                            type="hidden"
+                            name="hashtag"
+                            value="repeat"
+                            class="card__hashtag-hidden-input"
+                          />
+                          <button type="button" class="card__hashtag-name">
+                            #entertaiment
+                          </button>
+                          <button type="button" class="card__hashtag-delete">
+                            delete
+                          </button>
+                        </span>
+                      </div>
 
                       <label>
                         <input
@@ -251,62 +308,62 @@ This is example of new task, you can add picture, set date and time, add tags.</
                     <div class="card__colors-wrap">
                       <input
                         type="radio"
-                        id="color-black-1"
+                        id="color-black-2"
                         class="card__color-input card__color-input--black visually-hidden"
                         name="color"
                         value="black"
-                        checked
                       />
                       <label
-                        for="color-black-1"
+                        for="color-black-2"
                         class="card__color card__color--black"
                         >black</label
                       >
                       <input
                         type="radio"
-                        id="color-yellow-1"
+                        id="color-yellow-2"
                         class="card__color-input card__color-input--yellow visually-hidden"
                         name="color"
                         value="yellow"
                       />
                       <label
-                        for="color-yellow-1"
+                        for="color-yellow-2"
                         class="card__color card__color--yellow"
                         >yellow</label
                       >
                       <input
                         type="radio"
-                        id="color-blue-1"
+                        id="color-blue-2"
                         class="card__color-input card__color-input--blue visually-hidden"
                         name="color"
                         value="blue"
                       />
                       <label
-                        for="color-blue-1"
+                        for="color-blue-2"
                         class="card__color card__color--blue"
                         >blue</label
                       >
                       <input
                         type="radio"
-                        id="color-green-1"
+                        id="color-green-2"
                         class="card__color-input card__color-input--green visually-hidden"
                         name="color"
                         value="green"
                       />
                       <label
-                        for="color-green-1"
+                        for="color-green-2"
                         class="card__color card__color--green"
                         >green</label
                       >
                       <input
                         type="radio"
-                        id="color-pink-1"
+                        id="color-pink-2"
                         class="card__color-input card__color-input--pink visually-hidden"
                         name="color"
                         value="pink"
+                        checked
                       />
                       <label
-                        for="color-pink-1"
+                        for="color-pink-2"
                         class="card__color card__color--pink"
                         >pink</label
                       >
