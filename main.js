@@ -11,6 +11,9 @@ const cardContainer = document.querySelector('.board__tasks');
 // Стартовое кол-во карточек
 const startTasksNumber = 7;
 
+// Инициализация массива инпутов фильтров
+let filtersList = null;
+
 
 // Список фильтров
 const filters = [
@@ -324,9 +327,19 @@ const getRandomNumber = (min, max) => {
 };
 
 
-// Отметка чекбокса выбранным
-const setChecked = (element) => {
+// Отметка радиобаттона выбранным
+const setCheckedAttr = (element) => {
   element.checked = true;
+};
+
+
+// Сброс checked с радиобаттонов
+const resetCheckedAttr = (elements) => {
+  elements.forEach((item) => {
+    if (item.checked) {
+      item.checked = false;
+    }
+  });
 };
 
 
@@ -338,11 +351,14 @@ const emptyContainer = (container) => {
 
 // Обработчик клика по пункту фильтра
 const filterClickHandler = (evt) => {
+  resetCheckedAttr(filtersList);
   emptyContainer(cardContainer);
     
   const clickedFilter = evt.target;
   const spanElement = clickedFilter.nextSibling.querySelector(`span`);
   const taskNumber = Number(spanElement.textContent);
+  
+  setCheckedAttr(clickedFilter);
     
   if (taskNumber) {
     renderTaskList(taskNumber, cardContainer);
@@ -357,7 +373,7 @@ const renderFilterElement = (filterName) => {
 
   const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter" ${disabled_attribute}><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskNumber}</span></label>`;
     
-  var template = document.createElement('template');
+  const template = document.createElement('template');
   template.innerHTML = filterHtml;
   const element = template.content;
 
@@ -389,11 +405,11 @@ renderFilter(filters, filterContainer);
 
 
 // Массив инпутов фильтра 
-const filtersList = Array.from(filterContainer.querySelectorAll(`input`));
+filtersList = Array.from(filterContainer.querySelectorAll(`input`));
 
 
 // В фильтре отмечаем первый пункт выбранным (cтартовое состояние)
-setChecked(filtersList[0]);
+setCheckedAttr(filtersList[0]);
 
 
 // Рендеринг одной задачи
@@ -419,12 +435,6 @@ const renderTaskList = (amount, container) => {
     
   container.appendChild(fragment);
 };
-
-
-// Вешаем обработчики на инпуты в фильтрах
-//filtersList.forEach((item) => {
-//  item.addEventListener(`click`, filterClickHandler);
-//});
 
 
 // Запуск стартовой отрисовки карточек
