@@ -354,6 +354,8 @@ const filterClickHandler = (evt) => {
   resetCheckedAttr(filtersList);
   emptyContainer(cardContainer);
     
+    // console.log(taskNumber);
+    
   const clickedFilter = evt.target;
   const spanElement = clickedFilter.nextSibling.querySelector(`span`);
   const taskNumber = Number(spanElement.textContent);
@@ -368,10 +370,8 @@ const filterClickHandler = (evt) => {
 
 // Рендеринг одного пункта фильтра
 const renderFilterElement = (filterName) => {
-  const taskNumber = getRandomNumber(0, 20);
-  const disabled_attribute = (taskNumber) ? `` : `disabled`;
 
-  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter" ${disabled_attribute}><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskNumber}</span></label>`;
+  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter"><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> </span></label>`;
     
   const template = document.createElement('template');
   template.innerHTML = filterHtml;
@@ -389,8 +389,16 @@ const renderFilter = (filters, container) => {
     
   // Отрисовка всех пунктов списка фильтра
   filters.forEach((item)=> {
+    
+    const taskNumber = getRandomNumber(0, 20);
+    const disabledAttribute = (taskNumber) ? `` : `disabled`;
+      
     const filterElement = Array.from(renderFilterElement(item));
+    
+    filterElement[0].disabled = disabledAttribute;
     filterElement[0].addEventListener(`click`, filterClickHandler);
+    filterElement[1].querySelector(`span`).innerHTML = ` ` + taskNumber;
+    
     filterElement.forEach((item) => {
       fragment.appendChild(item);
     });
