@@ -9,7 +9,7 @@ const cardContainer = document.querySelector('.board__tasks');
 
 
 // Стартовое кол-во карточек
-const startTasks = 7;
+const startTasksNumber = 7;
 
 
 // Список фильтров
@@ -320,54 +320,67 @@ It is example of repeating task. It marks by wave.</textarea
 
 // Генерация случайного числа от min до max
 const getRandomNumber = (min, max) => {
-  const rand = min + Math.floor(Math.random() * (max + 1 - min));
-  return rand;
+  return rand = min + Math.floor(Math.random() * (max + 1 - min));
 };
 
 
 // Отметка чекбокса выбранным
 const setChecked = (element) => {
-    element.checked = `checked`;
+  element.checked = true;
 };
 
 
 // Очистка блока от содержимого
 const emptyContainer = (container) => {
-    container.innerHTML = ``;
+  container.innerHTML = ``;
+};
+
+
+// Обработчик клика по пункту фильтра
+const filterClickHandler = (evt) => {
+  emptyContainer(cardContainer);
+    
+  const clickedFilter = evt.target;
+  const spanElement = clickedFilter.nextSibling.querySelector(`span`);
+  const taskNumber = Number(spanElement.textContent);
+    
+  if (taskNumber) {
+    renderTaskList(taskNumber, cardContainer);
+  }
 };
 
 
 // Рендеринг одного пункта фильтра
-renderFilterElement = (filterName) => {
-    const taskAmount = ` ` + getRandomNumber(0, 20);
+const renderFilterElement = (filterName) => {
+  const taskNumber = getRandomNumber(0, 20);
+  const disabled_attribute = (taskNumber) ? `` : `disabled`;
+
+  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter" ${disabled_attribute}><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskNumber}</span></label>`;
     
-    const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter"><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count">${taskAmount}</span></label>`;
-    
-    var template = document.createElement('template');
-    template.innerHTML = filterHtml;
-    
-    const element = template.cloneNode(true).content;
-    
-    // Добавляем disabled, если в счётчике 0
-    element.querySelector(`input`).disabled = (element.querySelector(`span`).innerHTML.trim() === `0`) ? `disabled` : ``;
-    
-    return element;
+  var template = document.createElement('template');
+  template.innerHTML = filterHtml;
+  const element = template.content;
+
+  return element.children;
 };
 
 
 // Отрисовка всего фильтра
 const renderFilter = (filters, container) => {
-    emptyContainer(container);
+  emptyContainer(container);
     
-    const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
     
-    // Отрисовка всех пунктов списка фильтра
-    filters.forEach((item)=> {
-        const filterElement = renderFilterElement(item);
-        fragment.appendChild(filterElement);
+  // Отрисовка всех пунктов списка фильтра
+  filters.forEach((item)=> {
+    const filterElement = Array.from(renderFilterElement(item));
+    filterElement[0].addEventListener(`click`, filterClickHandler);
+    filterElement.forEach((item) => {
+      fragment.appendChild(item);
     });
+  });
     
-    container.appendChild(fragment);
+  container.appendChild(fragment);
 };
 
 
@@ -384,47 +397,35 @@ setChecked(filtersList[0]);
 
 
 // Рендеринг одной задачи
-renderTask = (task) => {
-    const div = document.createElement(`div`);
-    div.innerHTML = task;
-    return div;
+const renderTask = (taskHtml) => {
+  const template = document.createElement('template');
+  template.innerHTML = taskHtml;
+  const element = template.content;
+  
+  return element;
 };
 
 
 // Отрисовка списка задач
 const renderTaskList = (amount, container) => {
-    emptyContainer(container);
+  emptyContainer(container);
     
-    const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
     
-    for (let i = 0; i < amount; i++) {
-        const task = renderTask(taskTemplate);
-        fragment.appendChild(task);
-    }
+  for (let i = 0; i < amount; i++) {
+    const task = renderTask(taskTemplate);
+    fragment.appendChild(task);
+  }
     
-    container.appendChild(fragment);
-};
-
-
-// Обработчик клика по пункту фильтра
-const filterClickHandler = (evt) => {
-    emptyContainer(cardContainer);
-    
-    const clickedFilter = evt.target;
-    const spanElement = clickedFilter.nextSibling.querySelector(`span`);
-    const taskNumber = spanElement.textContent.trim();
-    
-    if (taskNumber) {
-        renderTaskList(taskNumber, cardContainer);
-    }
+  container.appendChild(fragment);
 };
 
 
 // Вешаем обработчики на инпуты в фильтрах
-filtersList.forEach((item) => {
-    item.addEventListener(`click`, filterClickHandler);
-});
+//filtersList.forEach((item) => {
+//  item.addEventListener(`click`, filterClickHandler);
+//});
 
 
 // Запуск стартовой отрисовки карточек
-renderTaskList(startTasks, cardContainer);
+renderTaskList(startTasksNumber, cardContainer);
