@@ -11,8 +11,13 @@ const cardContainer = document.querySelector('.board__tasks');
 // Стартовое кол-во карточек
 const startTasksNumber = 7;
 
-// Инициализация массива инпутов фильтров
+
+// Инициализация списка инпутов фильтров, 
 let filtersList = null;
+
+
+// Чекнутый элемент
+let checkedRadio = null;
 
 
 // Список фильтров
@@ -25,6 +30,7 @@ const filters = [
   `tags`,
   `archive`
 ];
+
 
 // Шаблон карточки
 const taskTemplate = `<article class="card card--pink card--repeat">
@@ -323,23 +329,24 @@ It is example of repeating task. It marks by wave.</textarea
 
 // Генерация случайного числа от min до max
 const getRandomNumber = (min, max) => {
-  return rand = min + Math.floor(Math.random() * (max + 1 - min));
+  return min + Math.floor(Math.random() * (max + 1 - min));
 };
 
 
 // Отметка радиобаттона выбранным
 const setCheckedAttr = (element) => {
   element.checked = true;
+  checkedRadio = element;
 };
 
 
 // Сброс checked с радиобаттонов
 const resetCheckedAttr = (elements) => {
-  elements.forEach((item) => {
-    if (item.checked) {
-      item.checked = false;
-    }
-  });
+//  elements.forEach((item) => {
+//    if (item.checked) {
+//      item.checked = false;
+//    }
+//  });
 };
 
 
@@ -354,13 +361,11 @@ const filterClickHandler = (evt) => {
   resetCheckedAttr(filtersList);
   emptyContainer(cardContainer);
     
-    // console.log(taskNumber);
-    
   const clickedFilter = evt.target;
+  setCheckedAttr(clickedFilter);
+    
   const spanElement = clickedFilter.nextSibling.querySelector(`span`);
   const taskNumber = Number(spanElement.textContent);
-  
-  setCheckedAttr(clickedFilter);
     
   if (taskNumber) {
     renderTaskList(taskNumber, cardContainer);
@@ -369,15 +374,17 @@ const filterClickHandler = (evt) => {
 
 
 // Рендеринг одного пункта фильтра
-const renderFilterElement = (filterName) => {
+const renderFilterElement = (filterName, taskAmount) => {
+  // $disabledValue = (taskAmount) ? false : true;
 
-  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter"><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> </span></label>`;
+  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter"><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskAmount}</span></label>`;
     
   const template = document.createElement('template');
   template.innerHTML = filterHtml;
-  const element = template.content;
+    
+  template.content.children[0].addEventListener(`click`, filterClickHandler);
 
-  return element.children;
+  return template.content.children;
 };
 
 
@@ -388,17 +395,12 @@ const renderFilter = (filters, container) => {
   const fragment = document.createDocumentFragment();
     
   // Отрисовка всех пунктов списка фильтра
-  filters.forEach((item)=> {
-    
+  filters.forEach((item) => {
     const taskNumber = getRandomNumber(0, 20);
-    const disabledAttribute = (taskNumber) ? `` : `disabled`;
-      
-    const filterElement = Array.from(renderFilterElement(item));
     
-    filterElement[0].disabled = disabledAttribute;
-    filterElement[0].addEventListener(`click`, filterClickHandler);
-    filterElement[1].querySelector(`span`).innerHTML = ` ` + taskNumber;
+    const filterElement = Array.from(renderFilterElement(item, taskNumber));
     
+    // Чтобы поместить элементы массива во fragment
     filterElement.forEach((item) => {
       fragment.appendChild(item);
     });
