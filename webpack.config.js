@@ -6,5 +6,6 @@ module.exports = {
   output: { // 
     path: path.join(__dirname, `public`),
     filename: `bundle.js`
-  }
+  },
+  devtool: `source-map` // подключение sourcemap
 };
