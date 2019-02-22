@@ -4,6 +4,7 @@
   "private": true,
   "description": "Личный проект «Менеджер задач» от HTML Academy",
   "scripts": {
+    "build": "webpackтройка выходного файла",
     "eslint": "eslint src/**/*.js",
     "test": "npm run eslint"
   },
