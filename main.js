@@ -375,9 +375,7 @@ const filterClickHandler = (evt) => {
 
 // Рендеринг одного пункта фильтра
 const renderFilterElement = (filterName, taskAmount) => {
-  // $disabledValue = (taskAmount) ? false : true;
-
-  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter"><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskAmount}</span></label>`;
+  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter" ${(taskAmount) ? `` : `disabled`}><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskAmount}</span></label>`;
     
   const template = document.createElement('template');
   template.innerHTML = filterHtml;
