@@ -1,3 +1,6 @@
+import renderFilterTemplate from './render-filter-template.js';
+
+
 // Блок для вставки фильтров
 const filterContainer = document.querySelector(`.main__filter`);
 
@@ -371,19 +374,6 @@ const filterClickHandler = (evt) => {
 };
 
 
-// Рендеринг одного пункта фильтра
-const renderFilterElement = (filterName, taskAmount) => {
-  const filterHtml = `<input type="radio" id="filter__${filterName}" class="filter__input visually-hidden" name="filter" ${(taskAmount) ? `` : `disabled`}><label for="filter__${filterName}" class="filter__label">${filterName}<span class="filter__${filterName}-count"> ${taskAmount}</span></label>`;
-
-  const template = document.createElement(`template`);
-  template.innerHTML = filterHtml;
-
-  template.content.children[0].addEventListener(`click`, filterClickHandler);
-
-  return template.content.children;
-};
-
-
 // Отрисовка всего фильтра
 const renderFilter = (filtersArr, container) => {
   emptyContainer(container);
@@ -394,7 +384,8 @@ const renderFilter = (filtersArr, container) => {
   filtersArr.forEach((filter) => {
     const taskNumber = getRandomNumber(0, 20);
 
-    const filterElement = Array.from(renderFilterElement(filter, taskNumber));
+    const filterElement = Array.from(renderFilterTemplate(filter, taskNumber));
+    filterElement[0].addEventListener(`click`, filterClickHandler);
 
     // Чтобы поместить элементы массива во fragment
     filterElement.forEach((item) => {
