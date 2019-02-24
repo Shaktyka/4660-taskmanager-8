@@ -55,7 +55,7 @@ const emptyContainer = (container) => {
 
 // Обработчик клика по пункту фильтра
 const addFilterClickHandler = (element, amount) => {
-  element.addEventListener('click', function (evt) {
+  element.addEventListener(`click`, function (evt) {
     emptyContainer(cardContainer);
 
     const clickedFilter = evt.target;
@@ -79,7 +79,7 @@ const renderFilter = (filtersArr, container) => {
     const taskNumber = getRandomNumber(0, 20);
 
     const filterElement = Array.from(renderFilterTemplate(filter, taskNumber));
-    
+
     addFilterClickHandler(filterElement[0], taskNumber);
 
     // Чтобы поместить элементы массива во fragment
