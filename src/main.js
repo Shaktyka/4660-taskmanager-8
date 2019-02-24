@@ -18,7 +18,7 @@ let filtersList = null;
 
 
 // Чекнутый элемент
-// let checkedRadio = null;
+let checkedRadio = 0;
 
 
 // Список фильтров
@@ -39,21 +39,12 @@ const getRandomNumber = (min, max) => {
 };
 
 
-// Отметка радиобаттона выбранным
-const setCheckedAttr = (element) => {
+// Переключение радиобаттонов
+const switchCheckedAttr = (element) => {
+  checkedRadio.checked = false;
   element.checked = true;
-  // checkedRadio = element;
+  checkedRadio = element;
 };
-
-
-// Сброс checked с радиобаттонов
-// const resetCheckedAttr = (elements) => {
-//  elements.forEach((item) => {
-//    if (item.checked) {
-//      item.checked = false;
-//    }
-//  });
-// };
 
 
 // Очистка блока от содержимого
@@ -64,11 +55,10 @@ const emptyContainer = (container) => {
 
 // Обработчик клика по пункту фильтра
 const filterClickHandler = (evt) => {
-  // resetCheckedAttr(filtersList);
   emptyContainer(cardContainer);
 
   const clickedFilter = evt.target;
-  setCheckedAttr(clickedFilter);
+  switchCheckedAttr(clickedFilter);
 
   const spanElement = clickedFilter.nextSibling.querySelector(`span`);
   const taskNumber = Number(spanElement.textContent);
@@ -111,7 +101,8 @@ filtersList = Array.from(filterContainer.querySelectorAll(`input`));
 
 
 // В фильтре отмечаем первый пункт выбранным (cтартовое состояние)
-setCheckedAttr(filtersList[0]);
+filtersList[0].checked = true;
+checkedRadio = filtersList[0];
 
 
 // Отрисовка списка задач
