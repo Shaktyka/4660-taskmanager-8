@@ -54,17 +54,17 @@ const emptyContainer = (container) => {
 
 
 // Обработчик клика по пункту фильтра
-const filterClickHandler = (evt) => {
-  emptyContainer(cardContainer);
+const addFilterClickHandler = (element, amount) => {
+  element.addEventListener('click', function (evt) {
+    emptyContainer(cardContainer);
 
-  const clickedFilter = evt.target;
-  switchCheckedAttr(clickedFilter);
+    const clickedFilter = evt.target;
+    switchCheckedAttr(clickedFilter);
 
-  const taskNumber = clickedFilter.getAttribute(`data-task-count`);
-
-  if (taskNumber) {
-    renderTaskList(taskNumber, cardContainer);
-  }
+    if (amount) {
+      renderTaskList(amount, cardContainer);
+    }
+  });
 };
 
 
@@ -79,8 +79,8 @@ const renderFilter = (filtersArr, container) => {
     const taskNumber = getRandomNumber(0, 20);
 
     const filterElement = Array.from(renderFilterTemplate(filter, taskNumber));
-    filterElement[0].addEventListener(`click`, filterClickHandler);
-    filterElement[0].setAttribute(`data-task-count`, taskNumber);
+    
+    addFilterClickHandler(filterElement[0], taskNumber);
 
     // Чтобы поместить элементы массива во fragment
     filterElement.forEach((item) => {
