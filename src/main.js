@@ -60,8 +60,7 @@ const filterClickHandler = (evt) => {
   const clickedFilter = evt.target;
   switchCheckedAttr(clickedFilter);
 
-  const spanElement = clickedFilter.nextSibling.querySelector(`span`);
-  const taskNumber = Number(spanElement.textContent);
+  const taskNumber = clickedFilter.getAttribute(`data-task-count`);
 
   if (taskNumber) {
     renderTaskList(taskNumber, cardContainer);
@@ -81,6 +80,7 @@ const renderFilter = (filtersArr, container) => {
 
     const filterElement = Array.from(renderFilterTemplate(filter, taskNumber));
     filterElement[0].addEventListener(`click`, filterClickHandler);
+    filterElement[0].setAttribute(`data-task-count`, taskNumber);
 
     // Чтобы поместить элементы массива во fragment
     filterElement.forEach((item) => {
