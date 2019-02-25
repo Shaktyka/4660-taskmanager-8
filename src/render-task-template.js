@@ -1,5 +1,6 @@
-// Шаблон карточки
-const taskTemplate = `<article class="card card--pink card--repeat">
+// Рендеринг одной задачи
+const renderTaskTemplate = () => {
+  return `<article class="card card--pink card--repeat">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -236,13 +237,6 @@ const taskTemplate = `<article class="card card--pink card--repeat">
               </div>
             </form>
           </article>`;
-
-// Рендеринг одной задачи
-const renderTaskTemplate = () => {
-  const template = document.createElement(`template`);
-  template.innerHTML = taskTemplate;
-
-  return template.content;
 };
 
 export default renderTaskTemplate;
