@@ -14,10 +14,6 @@ const cardContainer = document.querySelector(`.board__tasks`);
 const startTasksNumber = 7;
 
 
-// Чекнутый элемент
-let checkedRadio = 0;
-
-
 // Список фильтров
 const filters = [
   `all`,
@@ -35,16 +31,18 @@ const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 
 
 
 // Очистка блока от содержимого
-const emptyContainer = (container) => container.innerHTML = ``;
+// const emptyContainer = (container) => {
+//  container.innerHTML = ``;
+// };
 
 
 // Обработчик клика по пункту фильтра
-const addFilterClickHandler = (element, amount) => {
-  element.addEventListener(`click`, function (evt) {
-    emptyContainer(cardContainer);
-    renderTaskList(amount, cardContainer);
-  });
-};
+// const addFilterClickHandler = (element, amount) => {
+//  element.addEventListener(`click`, function () {
+//    emptyContainer(cardContainer);
+//    renderTaskList(amount, cardContainer);
+//  });
+// };
 
 
 // Отрисовка всего фильтра
@@ -53,7 +51,7 @@ const renderFilter = (filtersArr, container) => {
     const isChecked = (i === 0) ? true : ``;
     container.insertAdjacentHTML(`beforeend`, renderFilterTemplate(item, getRandomNumber(0, 20), isChecked));
   });
-  //addFilterClickHandler(element?, taskNumber);
+  // addFilterClickHandler(element?, taskNumber);
 };
 
 
