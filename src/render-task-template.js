@@ -25,8 +25,7 @@ const taskTemplate = `<article class="card card--pink card--repeat">
                     <textarea
                       class="card__text"
                       placeholder="Start typing your text here..."
-                      name="text">
-                      It is example of repeating task. It marks by wave.
+                      name="text">It is example of repeating task. It marks by wave.
                     </textarea>
                   </label>
                 </div>
