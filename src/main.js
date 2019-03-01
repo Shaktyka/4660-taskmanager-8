@@ -45,14 +45,22 @@ const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 
 // };
 
 
+// Генерация элемента
+//const getElement = (string) => {
+//  const template = document.createElement(`template`);
+//  template.innerHTML = string;
+//  return template.content.children;
+//};
+
+
 // Отрисовка всего фильтра
 const renderFilter = (filtersArr, container) => {
   filtersArr.forEach((item, i) => {
     const isChecked = (i === 0) ? true : ``;
     container.insertAdjacentHTML(`beforeend`, renderFilterTemplate(item, getRandomNumber(0, 20), isChecked));
   });
-  // addFilterClickHandler(element?, taskNumber);
 };
+// addFilterClickHandler(element?, taskNumber);
 
 
 // Стартовый рендеринг фильтра
