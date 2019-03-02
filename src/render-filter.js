@@ -1,7 +1,4 @@
-import renderTaskList from './render-task-list.js';
-
-// Блок для вставки карточек задач
-const cardContainer = document.querySelector(`.board__tasks`);
+import addFilterClickHandler from './add-filter-click-handler.js';
 
 // Рендеринг одного пункта фильтра
 const renderFilter = (filterName, taskAmount, isChecked = false) => {
@@ -11,10 +8,7 @@ const renderFilter = (filterName, taskAmount, isChecked = false) => {
   template.innerHTML = string;
 
   const element = template.content.children; // HTML-коллекция
-
-  element[0].addEventListener(`click`, () => {
-    renderTaskList(taskAmount, cardContainer);
-  });
+  addFilterClickHandler(element[0], taskAmount);
 
   return element;
 };
