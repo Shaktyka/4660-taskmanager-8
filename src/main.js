@@ -1,18 +1,16 @@
 import renderFilter from './render-filter.js';
 import renderTask from './render-task.js';
 import renderTaskList from './render-task-list.js';
+import getRandomNumber from './utils.js';
 
 // Блок для вставки фильтров
 const filterContainer = document.querySelector(`.main__filter`);
 
-
 // Блок для вставки карточек задач
 const cardContainer = document.querySelector(`.board__tasks`);
 
-
 // Стартовое кол-во карточек
 const startTasksNumber = 7;
-
 
 // Список фильтров
 const filters = [
@@ -25,34 +23,23 @@ const filters = [
   `archive`
 ];
 
-
-// Генерация случайного числа от min до max
-const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 - min));
-
-
-// Очистка блока от содержимого
-// const emptyContainer = (container) => {
-//  container.innerHTML = ``;
-// };
-
-
-// Генерация элемента
-//const getElement = (string) => {
-//  const template = document.createElement(`template`);
-//  template.innerHTML = string;
-//  return template.content.children;
-//};
-
-
 // Отрисовка всего фильтра
 const renderFilterList = (filtersArr, container) => {
   filtersArr.forEach((item, i) => {
-    const isChecked = (i === 0) ? true : ``;
-    container.insertAdjacentHTML(`beforeend`, renderFilter(item, getRandomNumber(0, 20), isChecked));
+    const isChecked = (item === 'all') ? true : ``;
+    
+  const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
+  filter.forEach((item) => {
+    container.appendChild(item);
+  });
+    
+// const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
+// console.log(filter);
+// for (const val of filter) {
+//   container.appendChild(val);
+// }
   });
 };
-// addFilterClickHandler(element?, taskNumber);
-
 
 // Стартовый рендеринг фильтра
 renderFilterList(filters, filterContainer);

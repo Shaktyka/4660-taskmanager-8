@@ -115,7 +115,7 @@ const renderTask = () => {
       </div>
     </div>
   </form>
-  </article>;`;
+  </article>`;
   const template = document.createElement(`template`);
   template.innerHTML = string;
 

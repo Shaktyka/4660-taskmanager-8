@@ -1,9 +1,10 @@
-// Обработчик клика по пункту фильтра
-const addFilterClickHandler = (element, amount) => {
-  element.addEventListener(`click`, function () {
-    emptyContainer(cardContainer);
-    renderTaskList(amount, cardContainer);
-    });
-};
+//addFilterClickHandler(element[0], taskAmount);
 
-export default addFilterClickHandler;
+// Обработчик клика по пункту фильтра
+//const addFilterClickHandler = (element, amount) => {
+//  element.addEventListener(`click`, function () {
+//    renderTaskList(amount, cardContainer);
+//  });
+//};
+//
+//export default addFilterClickHandler;
