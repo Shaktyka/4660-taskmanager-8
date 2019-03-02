@@ -1,5 +1,4 @@
 import renderFilter from './render-filter.js';
-import renderTask from './render-task.js';
 import renderTaskList from './render-task-list.js';
 import getRandomNumber from './utils.js';
 
@@ -25,19 +24,19 @@ const filters = [
 
 // Отрисовка всего фильтра
 const renderFilterList = (filtersArr, container) => {
-  filtersArr.forEach((item, i) => {
-    const isChecked = (item === 'all') ? true : ``;
-    
-  const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
-  filter.forEach((item) => {
-    container.appendChild(item);
-  });
-    
-// const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
-// console.log(filter);
-// for (const val of filter) {
-//   container.appendChild(val);
-// }
+  filtersArr.forEach((item) => {
+    const isChecked = (item === `all`) ? true : ``;
+
+    const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
+    filter.forEach((it) => {
+      container.appendChild(it);
+    });
+
+  // const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
+  // console.log(filter);
+  // for (const val of filter) {
+  //   container.appendChild(val);
+  // }
   });
 };
 
