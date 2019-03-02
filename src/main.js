@@ -1,6 +1,6 @@
-import renderFilterTemplate from './render-filter-template.js';
-import renderTaskTemplate from './render-task-template.js';
-
+import renderFilter from './render-filter.js';
+import renderTask from './render-task.js';
+import renderTaskList from './render-task-list.js';
 
 // Блок для вставки фильтров
 const filterContainer = document.querySelector(`.main__filter`);
@@ -36,15 +36,6 @@ const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 
 // };
 
 
-// Обработчик клика по пункту фильтра
-// const addFilterClickHandler = (element, amount) => {
-//  element.addEventListener(`click`, function () {
-//    emptyContainer(cardContainer);
-//    renderTaskList(amount, cardContainer);
-//  });
-// };
-
-
 // Генерация элемента
 //const getElement = (string) => {
 //  const template = document.createElement(`template`);
@@ -54,26 +45,17 @@ const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 
 
 
 // Отрисовка всего фильтра
-const renderFilter = (filtersArr, container) => {
+const renderFilterList = (filtersArr, container) => {
   filtersArr.forEach((item, i) => {
     const isChecked = (i === 0) ? true : ``;
-    container.insertAdjacentHTML(`beforeend`, renderFilterTemplate(item, getRandomNumber(0, 20), isChecked));
+    container.insertAdjacentHTML(`beforeend`, renderFilter(item, getRandomNumber(0, 20), isChecked));
   });
 };
 // addFilterClickHandler(element?, taskNumber);
 
 
 // Стартовый рендеринг фильтра
-renderFilter(filters, filterContainer);
-
-
-// Отрисовка списка задач
-const renderTaskList = (amount, container) => {
-  for (let i = 0; i < amount; i++) {
-    container.insertAdjacentHTML(`beforeend`, renderTaskTemplate());
-  }
-};
-
+renderFilterList(filters, filterContainer);
 
 // Запуск стартовой отрисовки карточек
 renderTaskList(startTasksNumber, cardContainer);

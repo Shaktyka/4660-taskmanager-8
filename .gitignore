@@ -14,6 +14,9 @@ node_modules/
 # Папка с собранными файлами проекта
 build/
 
+# Папка с временно ненужными кусками кода
+unnecessary/
+
 # Файлы сборки
 bundle.js
 bundle.js.map
