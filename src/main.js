@@ -27,16 +27,17 @@ const renderFilterList = (filtersArr, container) => {
   filtersArr.forEach((item) => {
     const isChecked = (item === `all`) ? true : ``;
 
-    const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
-    filter.forEach((it) => {
-      container.appendChild(it);
-    });
+    // const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
+    // filter.forEach((it) => {
+    // container.appendChild(it);
+    // });
 
-  // const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
-  // console.log(filter);
-  // for (const val of filter) {
-  //   container.appendChild(val);
-  // }
+    const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
+    console.log(filter);
+    for (let val of filter) {
+      // console.log(val);
+      container.appendChild(val);
+    }
   });
 };
 

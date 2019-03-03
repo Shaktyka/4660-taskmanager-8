@@ -9,6 +9,7 @@ const renderFilter = (filterName, taskAmount, isChecked = false) => {
 
   const element = template.content.children; // HTML-коллекция
   addFilterClickHandler(element[0], taskAmount);
+  // console.log(element);
 
   return element;
 };
