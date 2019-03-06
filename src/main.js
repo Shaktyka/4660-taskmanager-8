@@ -47,11 +47,11 @@ const renderFilterList = (filtersArr, container) => {
     const isChecked = (item === `all`) ? true : ``;
 
     const filter = renderFilter(item, getRandomNumber(0, 20), isChecked, renderTaskList, cardContainer, switchChecked);
-    
+
     if (filter.querySelector(`input`).checked) {
       isCheckedFilter = filter.querySelector(`input`);
     }
-    
+
     container.appendChild(filter);
   });
 };

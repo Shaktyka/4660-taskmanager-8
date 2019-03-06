@@ -6,12 +6,11 @@ const renderFilter = (filterName, taskAmount, isChecked = false, renderTaskList,
 
   const element = renderElement(string);
   const input = element.querySelector(`input`);
-  
-  // Вешаем обработчик
+
   input.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    switchChecked(evt.target);
     renderTaskList(taskAmount, taskContainer);
+    switchChecked(evt.target);
   });
 
   return element;
