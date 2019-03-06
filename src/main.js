@@ -11,9 +11,6 @@ const cardContainer = document.querySelector(`.board__tasks`);
 // Стартовое кол-во карточек
 const startTasksNumber = 7;
 
-// Чекнутый фильтр
-let isCheckedFilter = null;
-
 // Список фильтров
 const filters = [
   `all`,

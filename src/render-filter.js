@@ -7,7 +7,7 @@ const renderFilter = (filterName, taskAmount, isChecked, renderTaskList, taskCon
   const element = renderElement(string);
   const input = element.querySelector(`input`);
 
-  input.addEventListener(`click`, (evt) => {
+  input.addEventListener(`click`, () => {
     renderTaskList(taskAmount, taskContainer);
   });
 
