@@ -1,6 +1,6 @@
 import renderFilter from './render-filter.js';
-import renderTaskList from './render-task-list.js';
-import getRandomNumber from './utils.js';
+import {getRandomNumber} from './utils.js';
+import renderTask from './render-task.js';
 
 // Блок для вставки фильтров
 const filterContainer = document.querySelector(`.main__filter`);
@@ -10,6 +10,9 @@ const cardContainer = document.querySelector(`.board__tasks`);
 
 // Стартовое кол-во карточек
 const startTasksNumber = 7;
+
+// Чекнутый фильтр
+let isCheckedFilter = null;
 
 // Список фильтров
 const filters = [
@@ -22,22 +25,34 @@ const filters = [
   `archive`
 ];
 
+// Переключение состояния checked
+const switchChecked = (target) => {
+  isCheckedFilter.checked = false;
+  target.checked = true;
+  isCheckedFilter = target;
+};
+
+// Отрисовка списка задач
+const renderTaskList = (amount, container) => {
+  container.innerHTML = ``;
+
+  for (let i = 0; i < amount; i++) {
+    container.appendChild(renderTask());
+  }
+};
+
 // Отрисовка всего фильтра
 const renderFilterList = (filtersArr, container) => {
   filtersArr.forEach((item) => {
     const isChecked = (item === `all`) ? true : ``;
 
-    // const filter = Array.from(renderFilter(item, getRandomNumber(0, 20), isChecked));
-    // filter.forEach((it) => {
-    // container.appendChild(it);
-    // });
-
-    const filter = renderFilter(item, getRandomNumber(0, 20), isChecked);
-    console.log(filter);
-    for (let val of filter) {
-      // console.log(val);
-      container.appendChild(val);
+    const filter = renderFilter(item, getRandomNumber(0, 20), isChecked, renderTaskList, cardContainer, switchChecked);
+    
+    if (filter.querySelector(`input`).checked) {
+      isCheckedFilter = filter.querySelector(`input`);
     }
+    
+    container.appendChild(filter);
   });
 };
 

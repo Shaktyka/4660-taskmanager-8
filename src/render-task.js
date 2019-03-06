@@ -1,3 +1,5 @@
+import renderElement from './utils.js';
+
 // Рендеринг одной задачи
 const renderTask = () => {
   const string = `<article class="card card--pink card--repeat">
@@ -116,10 +118,8 @@ const renderTask = () => {
     </div>
   </form>
   </article>`;
-  const template = document.createElement(`template`);
-  template.innerHTML = string;
 
-  return template.content;
+  return renderElement(string);
 };
 
 export default renderTask;
