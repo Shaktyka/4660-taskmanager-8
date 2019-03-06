@@ -25,13 +25,6 @@ const filters = [
   `archive`
 ];
 
-// Переключение состояния checked
-const switchChecked = (target) => {
-  isCheckedFilter.checked = false;
-  target.checked = true;
-  isCheckedFilter = target;
-};
-
 // Отрисовка списка задач
 const renderTaskList = (amount, container) => {
   container.innerHTML = ``;
@@ -44,14 +37,8 @@ const renderTaskList = (amount, container) => {
 // Отрисовка всего фильтра
 const renderFilterList = (filtersArr, container) => {
   filtersArr.forEach((item) => {
-    const isChecked = (item === `all`) ? true : ``;
-
-    const filter = renderFilter(item, getRandomNumber(0, 20), isChecked, renderTaskList, cardContainer, switchChecked);
-
-    if (filter.querySelector(`input`).checked) {
-      isCheckedFilter = filter.querySelector(`input`);
-    }
-
+    const isChecked = (item === `all`) ? true : false;
+    const filter = renderFilter(item, getRandomNumber(0, 20), isChecked, renderTaskList, cardContainer);
     container.appendChild(filter);
   });
 };
