@@ -25,19 +25,22 @@ const filters = [
 // Отрисовка списка задач
 const renderTaskList = (amount, container) => {
   container.innerHTML = ``;
-
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i++) {
-    container.appendChild(renderTask());
+    fragment.appendChild(renderTask());
   }
+  container.appendChild(fragment);
 };
 
 // Отрисовка всего фильтра
 const renderFilterList = (filtersArr, container) => {
+  const fragment = document.createDocumentFragment();
   filtersArr.forEach((item) => {
     const isChecked = (item === `all`) ? true : false;
     const filter = renderFilter(item, getRandomNumber(0, 20), isChecked, renderTaskList, cardContainer);
-    container.appendChild(filter);
+    fragment.appendChild(filter);
   });
+  container.appendChild(fragment);
 };
 
 // Стартовый рендеринг фильтра
