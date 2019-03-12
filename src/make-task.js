@@ -55,13 +55,13 @@ const makeTask = () => {
     picture: `http://picsum.photos/100/100?r=${Math.random()}`,
     color: colors[getRandomNumber(0, colors.length - 1)],
     repeatingDays: {
-      Mo: getBoolean(),
-      Tu: getBoolean(),
-      We: getBoolean(),
-      Th: getBoolean(),
-      Fr: getBoolean(),
-      Sa: getBoolean(),
-      Su: getBoolean()
+      'Mo': getBoolean(),
+      'Tu': getBoolean(),
+      'We': getBoolean(),
+      'Th': getBoolean(),
+      'Fr': getBoolean(),
+      'Sa': getBoolean(),
+      'Su': getBoolean()
     },
     isFavorite: getBoolean(),
     isDone: getBoolean()

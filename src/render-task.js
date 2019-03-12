@@ -1,14 +1,14 @@
 import renderElement from './utils.js';
 
 // Рендеринг одной задачи
-const renderTask = (taskData) => {
-  const string = `<article class="card card--pink card--repeat">
+const renderTask = (taskData, repeat) => {
+  const string = `<article class="card card--${taskData.color} ${repeat ? `card--repeat` : ``}">
   <form class="card__form" method="get">
     <div class="card__inner">
       <div class="card__control">
         <button type="button" class="card__btn card__btn--edit">edit</button>
         <button type="button" class="card__btn card__btn--archive">archive</button>
-        <button type="button" class="card__btn card__btn--favorites card__btn--disabled">favorites</button>
+        <button type="button" class="card__btn card__btn--favorites ${taskData.isFavorite ? `card__btn--disabled` : ``}">favorites</button>
       </div>
       <div class="card__color-bar">
         <svg class="card__color-bar-wave" width="100%" height="10">
@@ -17,7 +17,7 @@ const renderTask = (taskData) => {
       </div>
       <div class="card__textarea-wrap">
         <label>
-          <textarea class="card__text" placeholder="Start typing your text here..." name="text">It is example of repeating task. It marks by wave.</textarea>
+          <textarea class="card__text" placeholder="Start typing your text here..." name="text">${taskData.title}</textarea>
         </label>
       </div>
       <div class="card__settings">
@@ -93,7 +93,7 @@ const renderTask = (taskData) => {
         </div>
         <label class="card__img-wrap card__img-wrap--empty">
           <input type="file" class="card__img-input visually-hidden" name="img"/>
-            <img src="img/add-photo.svg" alt="task picture" class="card__img"/>
+            <img src="${taskData.picture}" alt="task picture" class="card__img"/>
         </label>
         <div class="card__colors-inner">
           <h3 class="card__colors-title">Color</h3>
