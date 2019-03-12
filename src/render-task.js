@@ -1,7 +1,7 @@
 import renderElement from './utils.js';
 
 // Рендеринг одной задачи
-const renderTask = () => {
+const renderTask = (taskData) => {
   const string = `<article class="card card--pink card--repeat">
   <form class="card__form" method="get">
     <div class="card__inner">

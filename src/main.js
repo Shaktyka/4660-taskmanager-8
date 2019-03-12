@@ -1,5 +1,6 @@
 import renderFilter from './render-filter.js';
 import {getRandomNumber} from './utils.js';
+import makeTask from './make-task.js';
 import renderTask from './render-task.js';
 
 // Блок для вставки фильтров
