@@ -1,9 +1,12 @@
-import renderElement from './utils.js';
+import {renderElement, addLeadZero} from './utils.js';
 
+// Массив, из которого будет браться название месяца
 const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
 // Рендеринг одной задачи
 const renderTask = (taskData, repeat) => {
+
+  const calendarDate = new Date(taskData.dueDate);
 
   const string = `<article class="card card--${taskData.color} ${repeat ? `card--repeat` : ``}">
   <form class="card__form" method="get">
@@ -35,11 +38,11 @@ const renderTask = (taskData, repeat) => {
 
             <fieldset class="card__date-deadline" ${taskData.dueDate ? `` : `disabled`}>
               <label class="card__input-deadline-wrap">
-                <input class="card__date" type="text" placeholder="${new Date(taskData.dueDate).getDate()} ${months[new Date(taskData.dueDate).getMonth() - 1]}" name="date" />
+                <input class="card__date" type="text" placeholder="${calendarDate.getDate()} ${months[calendarDate.getMonth() - 1]}" name="date" />
               </label>
 
               <label class="card__input-deadline-wrap">
-                <input class="card__time" type="text" placeholder="${new Date(taskData.dueDate).getHours()}:${new Date(taskData.dueDate).getMinutes()} ${new Date(taskData.dueDate).getHours() >= 12 ? `PM` : `AM`}" name="time" />
+                <input class="card__time" type="text" placeholder="${calendarDate.getHours()}:${addLeadZero(calendarDate.getMinutes())} ${calendarDate.getHours() >= 12 ? `PM` : `AM`}" name="time" />
               </label>
             </fieldset>
 
@@ -80,8 +83,7 @@ const renderTask = (taskData, repeat) => {
                   <input type="hidden" name="hashtag" value="${tag}" class="card__hashtag-hidden-input" />
                   <button type="button" class="card__hashtag-name">#${tag}</button>
                   <button type="button" class="card__hashtag-delete">delete</button>
-                </span>`.trim()
-              ))).join('')}
+                </span>`.trim()))).join(``)}
             </div>
 
             <label>
@@ -90,9 +92,9 @@ const renderTask = (taskData, repeat) => {
           </div>
         </div>
 
-        <label class="card__img-wrap card__img-wrap--empty">
+        <label class="card__img-wrap ${taskData.picture ? `` : `card__img-wrap--empty`}">
           <input type="file" class="card__img-input visually-hidden" name="img" />
-          <img src="img/add-photo.svg" alt="task picture" class="card__img"/>
+          <img src="${taskData.picture}" alt="task picture" class="card__img"/>
         </label>
 
         <div class="card__colors-inner">
@@ -107,7 +109,7 @@ const renderTask = (taskData, repeat) => {
             <input type="radio" id="color-blue-5" class="card__color-input card__color-input--blue visually-hidden" name="color" value="blue" />
             <label for="color-blue-5" class="card__color card__color--blue">blue</label>
 
-            <input type="radio" id="color-green-5" class="card__color-input card__color-input--green visually-hidden" name="color" value="green" checked />
+            <input type="radio" id="color-green-5" class="card__color-input card__color-input--green visually-hidden" name="color" value="green" />
             <label for="color-green-5" class="card__color card__color--green">green</label>
 
             <input type="radio" id="color-pink-5" class="card__color-input card__color-input--pink visually-hidden" name="color" value="pink" />
@@ -122,7 +124,7 @@ const renderTask = (taskData, repeat) => {
       </div>
     </div>
   </form>
-</article>`;
+  </article>`;
 
   return renderElement(string);
 };
