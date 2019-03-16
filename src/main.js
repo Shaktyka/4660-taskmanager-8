@@ -24,15 +24,7 @@ const filters = [
 ];
 
 // Поиск факта наличия повтора задач
-const findRepeatedDay = (object) => {
-  let repeat = false;
-  for (let key in object) {
-    if (object[key]) {
-       repeat = true;
-    }
-  }
-  return repeat;
-};
+const findRepeatedDay = (daysObject) => Object.values(daysObject).some((it) => it === true);
 
 // Отрисовка списка задач
 const renderTaskList = (amount, container) => {
@@ -40,7 +32,7 @@ const renderTaskList = (amount, container) => {
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i++) {
     const taskData = makeTask();
-    fragment.appendChild(renderTask(taskData, findRepeatedDay(taskData)));
+    fragment.appendChild(renderTask(taskData, findRepeatedDay(taskData.repeatingDays)));
   }
   container.appendChild(fragment);
 };
