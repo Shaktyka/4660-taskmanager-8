@@ -46,22 +46,25 @@ const getTags = (array, num) => {
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
+// Генерация рандомной даты
+const getRandomDate = () => Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
+
 // Возвращает объект с данными для задачи
 const makeTask = () => {
   return {
     title: titles[getRandomNumber(0, titles.length - 1)],
-    dueDate: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
+    dueDate: getRandomDate(),
     tags: getTags(tags, getRandomNumber(0, 3)),
     picture: `http://picsum.photos/100/100?r=${Math.random()}`,
     color: colors[getRandomNumber(0, colors.length - 1)],
     repeatingDays: {
-      'Mo': getBoolean(),
-      'Tu': getBoolean(),
-      'We': getBoolean(),
-      'Th': getBoolean(),
-      'Fr': getBoolean(),
-      'Sa': getBoolean(),
-      'Su': getBoolean()
+      'mo': getBoolean(),
+      'tu': getBoolean(),
+      'we': getBoolean(),
+      'th': getBoolean(),
+      'fr': getBoolean(),
+      'sa': getBoolean(),
+      'su': getBoolean()
     },
     isFavorite: getBoolean(),
     isDone: getBoolean()
