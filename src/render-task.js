@@ -3,10 +3,14 @@ import {renderElement, addLeadZero} from './utils.js';
 // Массив, из которого будет браться название месяца
 const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
+// Поиск факта наличия повтора задач
+const findRepeatedDay = (obj) => Object.values(obj).some((it) => it);
+
 // Рендеринг одной задачи
-const renderTask = (taskData, repeat) => {
+const renderTask = (taskData) => {
 
   const calendarDate = new Date(taskData.dueDate);
+  const repeat = findRepeatedDay(taskData.repeatingDays);
 
   const string = `<article class="card card--${taskData.color} ${repeat ? `card--repeat` : ``}">
   <form class="card__form" method="get">
